@@ -1,0 +1,1 @@
+https://huggingface.co/mattmdjaga/segformer_b2_clothes
