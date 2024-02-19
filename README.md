@@ -5,7 +5,7 @@ install:
 
 1.download and put on custom_nodes 
 
-2.remove name Comfyui_segformer_b2_clothes
+2.rename Comfyui_segformer_b2_clothes
 
 3.requirements.txt
 
