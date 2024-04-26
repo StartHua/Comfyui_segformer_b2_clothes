@@ -9,6 +9,8 @@ install:
 
 3.requirements.txt
 
+2014-4-26 修改支持多图片！
+
 4.download mode https://huggingface.co/mattmdjaga/segformer_b2_clothes
 
 ![b5bd319f927b0c0de4049c70730ec0e](https://github.com/StartHua/Comfyui_segformer_b2_clothes/assets/22284244/28eb319a-189f-49d1-8a7c-0f76c1a49744)
