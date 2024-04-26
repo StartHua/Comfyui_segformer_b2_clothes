@@ -65,55 +65,58 @@ class segformer_b2_clothes:
                 }
         }
 
-    RETURN_TYPES = ("IMAGE","BOOLEAN")
-    RETURN_NAMES = ("mask_image","open")
+    RETURN_TYPES = ("IMAGE",)
+    RETURN_NAMES = ("mask_image",)
     OUTPUT_NODE = True
     FUNCTION = "sample"
     CATEGORY = "CXH"
 
     def sample(self,image,Face,Hat,Hair,Upper_clothes,Skirt,Pants,Dress,Belt,shoe,leg,arm,Bag,Scarf):
-        # seg切割结果，衣服pil
-        pred_seg,cloth = get_segmentation(image)
-        labels_to_keep = [0]
-        # if background :
-        #     labels_to_keep.append(0)
-        if not Hat:
-            labels_to_keep.append(1)
-        if not Hair:
-            labels_to_keep.append(2)
-        if not Upper_clothes:
-            labels_to_keep.append(4)
-        if not Skirt:
-            labels_to_keep.append(5)
-        if not Pants:
-            labels_to_keep.append(6)
-        if not Dress:
-            labels_to_keep.append(7)
-        if not Belt:
-            labels_to_keep.append(8)
-        if not shoe:
-            labels_to_keep.append(9)
-            labels_to_keep.append(10)
-        if not Face:
-            labels_to_keep.append(11)
-        if not leg:
-            labels_to_keep.append(12)
-            labels_to_keep.append(13)
-        if not arm:
-            labels_to_keep.append(14) 
-            labels_to_keep.append(15) 
-        if not Bag:
-            labels_to_keep.append(16)
-        if not Scarf:
-            labels_to_keep.append(17)
-            
-        mask = np.isin(pred_seg, labels_to_keep).astype(np.uint8)
         
-        # 创建agnostic-mask图像
-        mask_image = Image.fromarray(mask * 255)
-        mask_image = mask_image.convert("RGB")
-        mask_image = pil2tensor(mask_image)
-        # mask_r = pil2mask(mask_image)
-        # mask_tensor = torch.from_numpy(mask).clone()
+        results = []
+        for item in image:
+        
+            # seg切割结果，衣服pil
+            pred_seg,cloth = get_segmentation(item)
+            labels_to_keep = [0]
+            # if background :
+            #     labels_to_keep.append(0)
+            if not Hat:
+                labels_to_keep.append(1)
+            if not Hair:
+                labels_to_keep.append(2)
+            if not Upper_clothes:
+                labels_to_keep.append(4)
+            if not Skirt:
+                labels_to_keep.append(5)
+            if not Pants:
+                labels_to_keep.append(6)
+            if not Dress:
+                labels_to_keep.append(7)
+            if not Belt:
+                labels_to_keep.append(8)
+            if not shoe:
+                labels_to_keep.append(9)
+                labels_to_keep.append(10)
+            if not Face:
+                labels_to_keep.append(11)
+            if not leg:
+                labels_to_keep.append(12)
+                labels_to_keep.append(13)
+            if not arm:
+                labels_to_keep.append(14) 
+                labels_to_keep.append(15) 
+            if not Bag:
+                labels_to_keep.append(16)
+            if not Scarf:
+                labels_to_keep.append(17)
+                
+            mask = np.isin(pred_seg, labels_to_keep).astype(np.uint8)
+            
+            # 创建agnostic-mask图像
+            mask_image = Image.fromarray(mask * 255)
+            mask_image = mask_image.convert("RGB")
+            mask_image = pil2tensor(mask_image)
+            results.append(mask_image)
 
-        return (mask_image,True)
+        return (torch.cat(results, dim=0),)
