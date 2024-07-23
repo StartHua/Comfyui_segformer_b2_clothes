@@ -8,12 +8,12 @@ from PIL import Image,ImageOps, ImageFilter
 import torch.nn as nn
 import torch
 
-comfy_path = os.path.dirname(folder_paths.__file__)
-custom_nodes_path = os.path.join(comfy_path, "custom_nodes")
+# comfy_path = os.path.dirname(folder_paths.__file__)
+# custom_nodes_path = os.path.join(comfy_path, "custom_nodes")
 
 
 # 指定本地分割模型文件夹的路径
-model_folder_path = os.path.join(custom_nodes_path,"Comfyui_segformer_b2_clothes","checkpoints","segformer_b2_clothes")
+model_folder_path = os.path.join(folder_paths.models_dir,"segformer_b2_clothes")
 
 processor = SegformerImageProcessor.from_pretrained(model_folder_path)
 model = AutoModelForSemanticSegmentation.from_pretrained(model_folder_path)
@@ -49,7 +49,7 @@ class segformer_b2_clothes:
         return {"required":
                 {     
                  "image":("IMAGE", {"default": "","multiline": False}),
-                 "Face": ("BOOLEAN", {"default": True, "label_on": "enabled", "label_off": "disabled"}),
+                 "Face": ("BOOLEAN", {"default": True, "label_on": "enabled脸部", "label_off": "disabled"}),
                  "Hat": ("BOOLEAN", {"default": True, "label_on": "enabled", "label_off": "disabled"}),
                  "Hair": ("BOOLEAN", {"default": True, "label_on": "enabled", "label_off": "disabled"}),
                  "Upper_clothes": ("BOOLEAN", {"default": True, "label_on": "enabled", "label_off": "disabled"}),
