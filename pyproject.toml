@@ -1,0 +1,15 @@
+[project]
+name = "comfyui_segformer_b2_clothes"
+description = "SegFormer model fine-tuned on ATR dataset for clothes segmentation but can also be used for human segmentation!\nDownload the weight and put it under checkpoints: [a/https://huggingface.co/mattmdjaga/segformer_b2_clothes](https://huggingface.co/mattmdjaga/segformer_b2_clothes)"
+version = "1.0.0"
+license = "LICENSE"
+dependencies = ["transformers==4.33.2"]
+
+[project.urls]
+Repository = "https://github.com/StartHua/Comfyui_segformer_b2_clothes"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "Comfyui_segformer_b2_clothes"
+Icon = ""
